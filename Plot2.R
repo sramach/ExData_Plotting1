@@ -12,16 +12,14 @@ to.date=as.Date("2007-02-02","%Y-%m-%d")
 ## Get the Data for the above Date Range
 chart.data <- all.data[which(all.data$Date == from.date | all.data$Date == to.date ),]
 
-## Create the Histogram
-hist.info <- hist(chart.data$Global_active_power)
-
 ## Create the Graphics Device
-png("Plot1.png", width=480, height = 480, units = "px", bg="white")
+png("Plot2.png", width=480, height = 480, units = "px", bg="white")
 
-## Plot the Histogram
-plot(hist.info, xlab="Global Active Power (kilowatts)",main="Global Active Power",col="red",xlim=c(0,6),ylim=c(0,1200))
+## Plot the Line Chart
+## X Axis: Date/Time of the Observation
+## Y Axis: Global Active Power Measurement
+plot(strptime(paste(chart.data$Date,chart.data$Time),"%Y-%m-%d %H:%M:%S"),chart.data$Global_active_power, type="l",xlab="",ylab="Global Active Power (kilowatts)")
 
 ## Turn off the Graphics Device
 dev.off()
-
 
